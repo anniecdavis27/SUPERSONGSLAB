@@ -8,11 +8,13 @@ const main = async () => {
   await Song.deleteMany({});
 
   const songs = [
-    { title: "Happy", artist: "Pharell Williams", time: "5:36" },
-    { title: "Party Rock Anthem", artist: "LMFAO", time: "4:05" },
-    { title: "Imagine", artist: "John Lennon", time: "2:50" },
-    { title: "Call Me", artist: "Blondie", time: "6:19" },
-    { title: "My Heart Will Go On", artist: "Celine Dion", time: "3:47" },
+    { title: "happy", artist: "pharell williams", time: "5:36" },
+    { title: "party rock anthem", artist: "lmfao", time: "4:05" },
+    { title: "imagine", artist: "john lennon", time: "2:50" },
+    { title: "call me", artist: "blondie", time: "6:19" },
+    { title: "my heart will go on", artist: "celine dion", time: "3:47" },
+    { title: "free bird", artist: "lynyrd skynyrd", time: "9:05" },
+    { title: "stairway to heaven", artist: "led zepplin", time: "10:05" },
   ];
 
   await Song.insertMany(songs);
