@@ -4,7 +4,7 @@ const CreateForm = ({ item, handleSubmit, handleChange }) => {
   
   return (
     <form onSubmit={handleSubmit}>
-        <label>Title</label>
+        <label>Title</label><br />
         <input
         placeholder='add a title'
         value={item.title}
@@ -12,7 +12,7 @@ const CreateForm = ({ item, handleSubmit, handleChange }) => {
         onChange={handleChange}
         />
         <br />
-        <label>Artist</label>
+        <label>Artist</label><br />
         <input
         placeholder='add a link'
         value={item.artist}
@@ -20,7 +20,7 @@ const CreateForm = ({ item, handleSubmit, handleChange }) => {
         onChange={handleChange}
         />
 <br />
-        <label>Time</label>
+        <label>Time</label><br />
         <input
         placeholder='add a link'
         value={item.time}

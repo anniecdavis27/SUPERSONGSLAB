@@ -111,7 +111,7 @@ console.log(apiUrl)
         <li key={song.id}>
             <h3>{song.title}</h3>
             <p>{song.time}</p>
-            <p>{song.artist}</p>
+            <p className="songArtist">{song.artist}</p>
             <button onClick={() => toggleFaveFalse(song)}>Remove from Favorites</button>
         </li>
     ))

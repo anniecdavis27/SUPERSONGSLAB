@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.css';
+import './Faves.css'
 
 function Faves({ faves }) {
 
@@ -8,9 +9,9 @@ function Faves({ faves }) {
     }
     let favesList = faves.map(song => {
         <div key={song.id}>
-            <h3>{song.title}</h3>
-            <p>{song.time}</p>
-            <p>{song.artist}</p>
+            <h3 className="songTitle">{song.title}</h3>
+            <p className="songTime">{song.time}</p>
+            <p className="songArtist">{song.artist}</p>
             <button>Edit Song</button>
             <button>Remove from Favorites</button>
 
