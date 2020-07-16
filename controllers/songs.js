@@ -10,6 +10,13 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/faves", (req, res) => {
+  Song.find({ isFavorite: true }, (error, songs) => {
+    if (error) console.log(error);
+    else res.json(songs);
+  });
+});
+
 // song by id
 router.get("/:id", (req, res) => {
   Song.findById(req.params.id, (error, song) => {
