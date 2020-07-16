@@ -23,18 +23,8 @@ body {
   font-family: 'Courier Prime', monospace;
   margin: 25px;
   line-height: 5px;
-  width: 500px;
-  height: 950px;
-  border: 3px solid lightgrey;
-  border-right-color: darkblue;
-  border-radius: 20px;
-  padding-left: 15px;
-  padding-right: 15px;
 }
-/* .playlist-container {
-  display: grid;
 
-} */
 li {
   list-style: none;
   text-align: left;
