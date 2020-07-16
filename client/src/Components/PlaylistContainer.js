@@ -11,8 +11,6 @@ function PlaylistContainer(props) {
     const [faves, setFaves] = useState([])
     const [input, setInput] = useState({ title: "", time: "", artist: "" });
     const [item, setItem] = useState(null);
-    const [song, setSong] = useState(null)
-    const [isDeleted,setIsDeleted] = useState(false)
 
 console.log(apiUrl)
 
@@ -68,13 +66,26 @@ console.log(apiUrl)
 
     console.log(songs)
 
-    let songList = songs.map(song => (
+        // useEffect(() => {
+        //     const makeAPICall = async () => {
+        //       try {
+        //         const response = await axios(`${apiUrl}/songs/${song.id}/fav`)
+        //         setFaves(response.data)
+        //         console.log(response.data)
+        //       } catch (err) {
+        //         console.error(err)
+        //       }
+        //     }
+        //     makeAPICall()
+        //   }, [])
 
-        <li key={song.id}>
+    let songList = songs.map(song =>
+
+         (<li key={song.id}>
             <h3>{song.title}</h3>
             <p>{song.time}</p>
             <p>{song.artist}</p>
-            <button>Add to Favorites</button>
+            {/* <button onClick={toggleFave}>Add to Favorites</button> */}
         </li>
     ))
 
