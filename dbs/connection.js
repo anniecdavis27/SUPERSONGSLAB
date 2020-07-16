@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
+let MONGODB_URI = "";
 
-let MONGODB_URI = "mongodb://127.0.0.1:27017/songs_db";
+if (process.env.NODE_ENV === "production") {
+  MONGODB_URI = process.env.DB_URL;
+} else {
+  //MONGODB_URI = "mongodb://127.0.0.1:27017/stocks_db";
+  MONGODB_URI = "mongodb://localhost/songs_db";
+}
+
+//let MONGODB_URI = "mongodb://127.0.0.1:27017/songs_db";
 
 mongoose
   .connect(MONGODB_URI, {
