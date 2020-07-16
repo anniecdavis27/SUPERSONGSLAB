@@ -12,7 +12,7 @@ function PlaylistContainer(props) {
     const [input, setInput] = useState({ title: "", time: "", artist: "" });
     const [item, setItem] = useState(null);
     const [fave, setFave] = useState(null)
-    const [isUpdated,setIsUpdated] = useState(false)
+    const [isUpdated, setIsUpdated] = useState(false)
 
 console.log(apiUrl)
 
@@ -21,13 +21,13 @@ console.log(apiUrl)
         try {
           const response = await axios(`${apiUrl}/songs`)
           setSongs(response.data)
-          console.log(response.data)
+          console.log('this', response.data)
         } catch (err) {
           console.error(err)
         }
       }
       makeAPICall()
-    }, [])
+    }, [isUpdated])
 
     const handleChange = (event) => {
         console.log("event", event.target.name, event.target.value);
@@ -64,7 +64,7 @@ console.log(apiUrl)
           }
         }
         makeAPICall()
-      }, [])
+      }, [isUpdated])
 
     console.log(songs)
 
@@ -81,7 +81,9 @@ console.log(apiUrl)
         //     makeAPICall()
         //   }, [])
 
-   
+   if(!songs) {
+       return <p>...loading</p>
+   }
 
     let songList = songs.map(song =>
          (<li key={song.id}>
@@ -101,6 +103,7 @@ console.log(apiUrl)
           })
         setIsUpdated(true)
           console.log(song)
+          window.location.reload()
     }
 
     let favesList = faves.map(song => (
@@ -122,11 +125,12 @@ console.log(apiUrl)
           })
           console.log(song)
         setIsUpdated(true)
+        window.location.reload()
     }
 
-    if (isUpdated) {
-        return <Redirect to={`/`} />
-    }
+    // if (isUpdated) {
+    //     return <Redirect to={`/`} />
+    // }
 
   return (
     <div className="playlist-container">
