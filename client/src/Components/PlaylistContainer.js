@@ -3,11 +3,16 @@ import '../App.css';
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 import Songs from './Songs'
+import CreateForm from './CreateForm'
 // import Faves from './Faves'
 
-function PlaylistContainer() {
+function PlaylistContainer(props) {
     const [songs, setSongs] = useState([])
-    const [fave, setFaves] = useState([])
+    const [faves, setFaves] = useState([])
+    const [input, setInput] = useState({ title: "", time: "", artist: "" });
+    const [item, setItem] = useState(null);
+    const [song, setSong] = useState(null)
+    const [isDeleted,setIsDeleted] = useState(false)
 
 console.log(apiUrl)
 
@@ -24,35 +29,63 @@ console.log(apiUrl)
       makeAPICall()
     }, [])
 
+    const handleChange = (event) => {
+        console.log("event", event.target.name, event.target.value);
+        setInput({
+          ...input,
+          [event.target.name]: event.target.value,
+        });
+      };
+
+      const handleSubmit = (event) => {
+  
+        event.preventDefault();
+    
+        console.log("handleSubmit");
+        axios({
+          url: `${apiUrl}/songs`,
+          method: "POST",
+          data: input,
+        })
+          .then((res) => {
+              setItem({ createdItem: res.data.item })
+            })
+          .catch(console.error);
+      };
+
+    useEffect(() => {
+        const makeAPICall = async () => {
+          try {
+            const response = await axios(`${apiUrl}/songs/faves`)
+            setFaves(response.data)
+            console.log(response.data)
+          } catch (err) {
+            console.error(err)
+          }
+        }
+        makeAPICall()
+      }, [])
+
     console.log(songs)
 
-        if(!songs) {
-        return <p>...loading</p>
-    }
-
     let songList = songs.map(song => (
+
         <li key={song.id}>
             <h3>{song.title}</h3>
             <p>{song.time}</p>
             <p>{song.artist}</p>
-            <button>Edit Song</button>
-            <button>Remove Song</button>
             <button>Add to Favorites</button>
-
         </li>
     ))
 
-    // useEffect(() => {
-    //     const makeAPICall = async () => {
-    //       try {
-    //         const response = await axios(`${apiUrl}/fav`)
-    //         setFaves(response.data)
-    //       } catch (err) {
-    //         console.error(err)
-    //       }
-    //     }
-    //     makeAPICall()
-    //   }, [])
+    let favesList = faves.map(song => (
+
+        <li key={song.id}>
+            <h3>{song.title}</h3>
+            <p>{song.time}</p>
+            <p>{song.artist}</p>
+        </li>
+    ))
 
   return (
     <div className="playlist-container">
@@ -61,8 +94,13 @@ console.log(apiUrl)
         {/* <Songs songs={songs}/> */}
         <button>Add a Song</button>
         <h1>Favorites</h1>
+        <ul>{favesList}</ul>
         {/* <Faves faves={faves}/> */}
-        {/* <Form /> */}
+        <CreateForm 
+            item={input}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+        />
     </div>
   );
 }
