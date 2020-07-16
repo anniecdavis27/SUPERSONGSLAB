@@ -51,6 +51,7 @@ console.log(apiUrl)
               setItem({ createdItem: res.data.item })
             })
           .catch(console.error);
+          window.location.reload()
       };
 
     useEffect(() => {
